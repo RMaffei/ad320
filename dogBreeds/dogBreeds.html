@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dog Breeds</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+
+  #breeds-select {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  #breed-details,
+  #group-details,
+  #fact {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+<h1>Dog Breeds</h1>
+<select id="breeds-select">
+  <option value="">Select a breed</option>
+</select>
+<div id="breed-details"></div>
+<div id="group-details"></div>
+<div id="fact"></div>
+<script>
+  // function to fetch JSON data from URL
+  function fetchJSON(url) {
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data from ${url}`);
+        }
+        return response.json();
+      })
+      .catch(error => console.error(error));
+  }
+  const breedsSelect = document.getElementById('breeds-select');
+  const breedDetails = document.getElementById('breed-details');
+  const groupDetails = document.getElementById('group-details');
+  const fact = document.getElementById('fact');
+  // function to fetch all pages of breeds
+  async function fetchAllBreeds(url) {
+    const response = await fetchJSON(url);
+    const breeds = response.data;
+    const allBreeds = [];
+    breeds.forEach(breed => {
+      allBreeds.push({ id: breed.id, name: breed.attributes.name });
+    });
+    const nextPage = response.links.next;
+    if (nextPage) {
+      return allBreeds.concat(await fetchAllBreeds(nextPage));
+    } else {
+      return allBreeds;
+    }
+  }
+  // start fetching breeds from the first page
+  fetchAllBreeds('https://dogapi.dog/api/v2/breeds')
+    .then(allBreeds => {
+      allBreeds.sort((a, b) => a.name.localeCompare(b.name)); // alphabetically sort the breeds
+      allBreeds.forEach(breed => {
+        const option = document.createElement('option');
+        option.value = breed.id;
+        option.textContent = breed.name;
+        breedsSelect.appendChild(option);
+      });
+    })
+    .catch(error => console.error(error));
+  // event listener for when breed is selected from dropdown
+  breedsSelect.addEventListener('change', () => {
+    const selectedBreedId = breedsSelect.value;
+    if (selectedBreedId) {
+      // fetching details of selected breed
+      fetchJSON(`https://dogapi.dog/api/v2/breeds/${selectedBreedId}`)
+        .then(breedData => {
+          const breed = breedData.data.attributes;
+          breedDetails.innerHTML = `
+            <h3>${breed.name}</h3>
+            <p>Description: ${breed.description}</p>
+            <p>Hypoallergenic: ${breed.hypoallergenic ? 'Yes' : 'No'}</p>
+          `;
+        })
+        .catch(error => console.error(error));
+      // fetching the breed's group info
+      fetchJSON(`https://dogapi.dog/api/v2/groups`)
+        .then(groupData => {
+          const breedGroups = groupData.data.filter(group => {
+            return group.relationships.breeds.data.find(b => b.id === selectedBreedId);
+          }).map(group => group.attributes.name);
+
+          groupDetails.innerHTML = '<h3>Breed Group:</h3>';
+          if (breedGroups.length > 0) {
+            breedGroups.forEach(group => {
+              groupDetails.innerHTML += `<p>${group}</p>`;
+            });
+          } else {
+            groupDetails.innerHTML += '<p>Unknown</p>';
+          }
+        })
+        .catch(error => console.error(error));
+
+      // fetching a random fact from /facts
+      fetchJSON('https://dogapi.dog/api/v2/facts')
+        .then(factsData => {
+          const facts = factsData.data;
+          const randomIndex = Math.floor(Math.random() * facts.length);
+          const randomFact = facts[randomIndex].attributes.body;
+          fact.innerHTML = `<h3>Random Fact:</h3><p>${randomFact}</p>`;
+        })
+        .catch(error => console.error(error));
+    } else {
+      // clearing details ifno breed is selected
+      breedDetails.innerHTML = '';
+      groupDetails.innerHTML = '';
+      fact.innerHTML = '';
+    }
+  });
+</script>
+</body>
+</html>

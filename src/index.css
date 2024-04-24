@@ -1,0 +1,44 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+  background-color: skyblue;
+  margin:40px 0;
+  text-align: center;
+}
+
+.container {
+  width:90%;
+  max-width:800px;
+  padding:10px;
+  background-color: grey;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 30px auto;
+  text-align: center;
+
+}
+
+img {
+  max-width:100%;
+  height:auto;
+}
+
+button.center {
+  display:block;
+  margin: 0 auto;
+}
+.footer {
+  background-color: yellow;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 10px;
+      max-width: 90%; /* Adjust width for smaller screens */
+  }
+}

@@ -1,0 +1,148 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.task-manager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background-color: #1e1e1e;
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.task-manager h1 {
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.add-task {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.add-task input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background-color: #333;
+  color: #ffffff;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.add-task button {
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  background-color: grey;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.add-task button:hover {
+  background-color: #0056b3;
+}
+
+.task-lists {
+  width: 100%;
+}
+
+.task-lists ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.task-lists h2 {
+  margin: 20px 0 10px;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.task-lists li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background-color: #2c2c2c;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.task-lists li:hover {
+  transform: translateY(-2px);
+  background-color: #333;
+}
+
+.task-lists li .completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.task-lists li button {
+  padding: 5px 15px; 
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 90px; 
+  text-align: center; 
+  transition: background-color 0.3s;
+}
+
+.task-lists li .complete-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.task-lists li .complete-button:hover {
+  background-color: #218838;
+}
+
+.task-lists li .delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.task-lists li .delete-button:hover {
+  background-color: #c82333;
+}
+
+.task-lists li .undo-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.task-lists li .undo-button:hover {
+  background-color: #0056b3;
+}

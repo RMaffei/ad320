@@ -1,6 +1,6 @@
 Task Manager
 
-A modern and sleek task manager application built with React. This app allows users to add, complete, and delete tasks with a persistent state using local storage. The design features a dark mode theme and a professional UI for a seamless user experience.
+A modern and sleek task manager application built with React. This app allows users to add, complete, and delete tasks with a persistent state using local storage. Some of the major features includes local persistent storage and a responsive design. 
 
 How to Run:
 

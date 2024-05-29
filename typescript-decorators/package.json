@@ -1,0 +1,14 @@
+{
+  "name": "wikimedia-typescript",
+  "version": "1.0.0",
+  "description": "A simple Wikimedia-like page using TypeScript with decorators.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}

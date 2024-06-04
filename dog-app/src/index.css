@@ -1,0 +1,116 @@
+:root {
+  --background-color: #000000;
+  --primary-color: #bb86fc;
+  --secondary-color: #2d2d2d;
+  --text-color: #ffffff;
+  --text-secondary-color: #b0b0b0;
+  --border-color: #444444;
+  --highlight-color: #ff4081;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1, h2 {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  max-width: 900px; /* Adjusted width */
+  margin: 20px auto;
+  box-sizing: border-box;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+select, ul, div, button, p {
+  width: 100%;
+  margin: 5px 0; /* Reduced margin */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+select {
+  width: 80%; /* Adjusted width to match title */
+  border: 1px solid var(--highlight-color);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+button {
+  background-color: var(--highlight-color);
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+button:hover {
+  background-color: var(--primary-color);
+}
+
+@media (min-width: 769px) {
+  .container {
+    width: 80%; /* Increased width */
+  }
+
+  select, ul, div, button, p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+  select, ul, div, button, p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+  }
+
+  select, ul, div, button, p {
+    width: 100%;
+  }
+}
